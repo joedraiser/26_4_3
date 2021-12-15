@@ -75,30 +75,30 @@ public:
         return x>=windowPos.x && x<(windowPos.x+width) && y>=windowPos.y && y<(windowPos.y+length);
     }
 
-    static void resize(window& current, int width, int length)
+    void resize(int width, int length)
     {
-        if((current.windowPos.x+width)<80&&(current.windowPos.y+length)<50)
+        if((windowPos.x+width)<80&&(windowPos.y+length)<50)
         {
-            current.width=width;
-            current.length=length;
+            this->width=width;
+            this->length=length;
         }
     }
 
-    static void move(window& current, int x, int y)
+    void move(int x, int y)
     {
-        if((x+current.width<80)&&(y+current.length<50))
+        if((x+width<80)&&(y+length<50))
         {
-            current.windowPos.setX(x);
-            current.windowPos.setY(y);
+            windowPos.setX(x);
+            windowPos.setY(y);
         }
     }
 
-    static void display(window current)
+    void display()
     {
         for(int y=0;y<50;y++)
         {
             for (int x = 0; x < 80; x++) {
-                if (current.isInsideWindow(x, y))
+                if (this->isInsideWindow(x, y))
                     std::cout << "1";
                 else
                     std::cout << "0";
@@ -124,17 +124,17 @@ int main()
         {
             std::cout << "Input new coords for the window: ";
             std::cin >> x >> y;
-            window::move(test, x, y);
+            test.move(x, y);
         }
         else if(input=="resize")
         {
             std::cout << "Input new size of the window: ";
             std::cin >> x >> y;
-            window::resize(test, x, y);
+            test.resize(x, y);
         }
         else if(input=="display")
         {
-            window::display(test);
+            test.display();
         }
 
     }
